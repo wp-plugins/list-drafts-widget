@@ -1,6 +1,6 @@
 === List Drafts Widget ===
 Contributors: LesBessant
-Donate link: http://lcb.me.uk/losingit/
+Donate link: http://lcb.me.uk/losingit/donations
 Tags: draft, drafts, sidebar, widget 
 Requires at least: 2.2
 Tested up to: 2.6
