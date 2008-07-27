@@ -6,8 +6,7 @@ Requires at least: 2.2
 Tested up to: 2.6
 Stable tag: 1.0.2
 
-Outputs an unordered list of the titles of saved draft posts in a sidebar widget. The user can configure the widget title, and add a label for any untitled drafts.
- 
+Outputs an unordered list of the titles of saved draft posts in a sidebar widget. 
 == Description ==
 
 List Drafts is a simple sidebar widget which outputs a list of the titles of all posts currently saved as drafts. Users can set the title of the widget, and add a label to be used for all untitled drafts.
@@ -23,7 +22,11 @@ You can now have a list of forthcoming items as a "teaser" for your readers, or 
 
 == Frequently Asked Questions ==
 
-None at the moment.
+But I don't like widgets!
+
+Neither did I, until recently, but they're growing on me, which is why I made this one. 
+
+But if you really don't like widgets, you can use my older <a href="http://wordpress.org/extend/plugins/list-draft-posts/">List Draft Posts</a> plugin.
 
 == Screenshots ==
 
