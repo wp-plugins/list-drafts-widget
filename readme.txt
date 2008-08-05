@@ -1,10 +1,10 @@
 === List Drafts Widget ===
 Contributors: LesBessant
-Donate link: http://lcb.me.uk/losingit/donations
+Donate link: http://losingit.me.uk/donations
 Tags: draft, drafts, sidebar, widget 
 Requires at least: 2.2
 Tested up to: 2.6
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 
 Outputs an unordered list of the titles of saved draft posts in a sidebar widget. 
 == Description ==

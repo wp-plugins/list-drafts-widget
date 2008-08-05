@@ -1,11 +1,11 @@
 <?php
 /*
 Plugin Name: List Drafts Widget
-Plugin URI: http://lcb.me.uk/losingit/2008/06/29/list-drafts-widget
+Plugin URI: http://losingit.me.uk/2008/06/29/list-drafts-widget
 Description: A sidebar widget that lists the titles of draft posts
-Version: 1.0.2
+Version: 1.0.3
 Author: Les Bessant
-Author URI: http://lcb.me.uk/losingit/
+Author URI: http://losingit.me.uk/
 */
 
 
@@ -99,8 +99,8 @@ function widget_lcb_list_drafts_init() {
 // The HTML below is the control form for editing options.
 ?>
 		<div>
-		<p style="text-align:right;"><label for="lcb_list_drafts-title" style="line-height:35px;display:block;">Heading: <input type="text" id="lcb_list_drafts-title" name="lcb_list_drafts-title" value="<?php echo $title; ?>" /></label></p>
-		<p style="text-align:right;"><label for="lcb_list_drafts-untitled" style="line-height:35px;display:block;">Name for untitled posts: <input type="text" id="lcb_list_drafts-untitled" name="lcb_list_drafts-untitled" value="<?php echo $untitled; ?>" /></label></p>
+		<p style="text-align:right;"><label for="lcb_list_drafts-title" style="line-height:35px;display:block;">Widget Title: <input type="text" id="lcb_list_drafts-title" name="lcb_list_drafts-title" value="<?php echo $title; ?>" /></label></p>
+		<p style="text-align:right;"><label for="lcb_list_drafts-untitled" style="line-height:35px;display:block;">Label for untitled drafts: <input type="text" id="lcb_list_drafts-untitled" name="lcb_list_drafts-untitled" value="<?php echo $untitled; ?>" /></label></p>
 		<input type="hidden" name="lcb_list_drafts-submit" id="lcb_list_drafts-submit" value="1" />
 		</div>
 	<?php
