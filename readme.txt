@@ -1,10 +1,9 @@
 === List Drafts Widget ===
 Contributors: LesBessant
-Donate link: http://losingit.me.uk/donations
 Tags: draft, drafts, sidebar, widget 
-Requires at least: 2.2
-Tested up to: 2.6
-Stable tag: 1.0.3
+Requires at least: 2.8
+Tested up to: 3.0-Alpha
+Stable tag: 2.0.1
 
 Outputs an unordered list of the titles of saved draft posts in a sidebar widget. 
 == Description ==
@@ -13,20 +12,38 @@ List Drafts is a simple sidebar widget which outputs a list of the titles of all
 
 You can now have a list of forthcoming items as a "teaser" for your readers, or as a reminder to authors that they really need to finish those posts they started. It will probably not be of interest to many people, but I like it.
 
+This version has been refactored to use the new plugins API introduced in WordPress 2.8
+
 == Installation ==
 
-
-1. Upload the 'list-drafts' folder to your '/wp-content/plugins/ directory
+1. Upload the 'list-drafts-widget' folder to your '/wp-content/plugins/ directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
-3. Add the widget to your sidebar in the usual way, and configure the title and description options.
+3. Add the widget to your sidebar or other widget-enabled area in the usual way. 4. (Optional) Change the title and the text used for any untitled drafts - the default values are "Coming Soon" and "An untitled post"
 
 == Frequently Asked Questions ==
 
-But I don't like widgets!
+= Does this have to be in the sidebar? =
 
-Neither did I, until recently, but they're growing on me, which is why I made this one. 
+This is a pure widget, so it can only be used in a sidebar or other widget-enabled area of your theme.
 
-But if you really don't like widgets, you can use my older <a href="http://wordpress.org/extend/plugins/list-draft-posts/">List Draft Posts</a> plugin.
+My older <a href="http://wordpress.org/extend/plugins/list-draft-posts/">List Draft Posts</a> plugin allows you to insert the list of drafts without resort to widgets. Please note that I won't be developing that plugin any more.
+
+= Can it do this or that? =
+
+Err, maybe. But that would be a job for a better coder. Anyone who wants to make their own version is more than welcome to do so.
+
+== Changelog ==
+
+= 2.0.1 =
+* Changed default widget title to "Coming Soon"
+
+= 2.0 =
+* Re-written to use the new Widget API introduced with WordPress 2.8. Otherwise unchanged.
+
+
+= 1.0.3 =
+* First released version
+
 
 == Screenshots ==
 
