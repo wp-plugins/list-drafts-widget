@@ -3,7 +3,7 @@
 Plugin Name: List Drafts Widget
 Plugin URI: http://losingit.me.uk/2010/03/14/list-drafts-widget-revisited
 Description: A sidebar widget that lists the titles of draft posts
-Version: 2.0
+Version: 2.0.1
 Author: Les Bessant
 Author URI: http://losingit.me.uk/
 */
@@ -135,7 +135,7 @@ $my_drafts = $wpdb->get_results("SELECT post_title FROM $wpdb->posts WHERE post_
 	function form( $instance ) {
 
 		/* Set up some default widget settings. */
-		$defaults = array( 'title' => __('List Drafts', 'listdrafts'), 'untitled' => __('An untitled post', 'listdrafts'));
+		$defaults = array( 'title' => __('Coming Soon', 'listdrafts'), 'untitled' => __('An untitled post', 'listdrafts'));
 		$instance = wp_parse_args( (array) $instance, $defaults ); ?>
 
 		<!-- Widget Title: Text Input -->
