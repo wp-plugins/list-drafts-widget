@@ -1,9 +1,9 @@
 <?php
 /*
 Plugin Name: List Drafts Widget
-Plugin URI: http://losingit.me.uk/2008/06/29/list-drafts-widget
+Plugin URI: http://losingit.me.uk/2010/03/14/list-drafts-widget-revisited
 Description: A sidebar widget that lists the titles of draft posts
-Version: 1.0.3
+Version: 2.0
 Author: Les Bessant
 Author URI: http://losingit.me.uk/
 */
@@ -11,7 +11,7 @@ Author URI: http://losingit.me.uk/
 
 /*
 List Drafts Widget:
-Copyright (c) 2008 Les Bessant
+Copyright (c) 2008-2010 Les Bessant
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -28,106 +28,68 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 
-function widget_lcb_list_drafts_init() {
+/**
+ * Add function to widgets_init that'll load our widget.
+ * @since 0.1
+ */
+add_action( 'widgets_init', 'listdrafts_load_widgets' );
 
-	// Check to see required Widget API functions are defined...
-	if ( !function_exists('register_sidebar_widget') || !function_exists('register_widget_control') )
-		return; // ...and if not, exit gracefully from the script.
+/**
+ * Register our widget.
+ * 'ListDrafts_Widget' is the widget class used below.
+ *
+ * @since 0.1
+ */
+function listdrafts_load_widgets() {
+	register_widget( 'ListDrafts_Widget' );
+}
 
-	$default_options = array(
-		'title' => 'Coming Soon',
-		'untitled' => 'An untitled post'
-	);
+/**
+ * List Drafts Widget class.
+ * This class handles everything that needs to be handled with the widget:
+ * the settings, form, display, and update.  Nice!
+ *
+ * @since 0.1
+ */
+class ListDrafts_Widget extends WP_Widget {
 
-	add_option('widget_lcb_list_drafts', $default_options );
+	/**
+	 * Widget setup.
+	 */
+	function ListDrafts_Widget() {
+		/* Widget settings. */
+		$widget_ops = array( 'classname' => 'example', 'description' => __('A widget which displays the title of draft posts.', 'listdrafts') );
 
+		/* Widget control settings. */
+		$control_ops = array( 'width' => 300, 'height' => 350, 'id_base' => 'listdrafts-widget' );
 
+		/* Create the widget. */
+		$this->WP_Widget( 'listdrafts-widget', __('List Drafts Widget', 'listdrafts'), $widget_ops, $control_ops );
+	}
 
-	// This function prints the sidebar widget--the cool stuff!
-	function widget_lcb_list_drafts($args) {
+	/**
+	 * How to display the widget on the screen.
+	 */
+	function widget( $args, $instance ) {
+		extract( $args );
 
-		// $args is an array of strings which help your widget
-		// conform to the active theme: before_widget, before_title,
-		// after_widget, and after_title are the array keys.
-		extract($args);
+		/* Our variables from the widget settings. */
+		$title = apply_filters('widget_title', $instance['title'] );
+		$untitled = $instance['untitled'];
+		
 
-		// Collect our widget's options, or define their defaults.
-		$options = get_option('widget_lcb_list_drafts');
-		$title = empty($options['title']) ? 'Coming Soon' : $options['title'];
-		$untitled = empty($options['untitled']) ? 'An untitled post' : $options['untitled'];
-
- 		// It's important to use the $before_widget, $before_title,
- 		// $after_title and $after_widget variables in your output.
-		global $wpdb;
-
-		$my_drafts = $wpdb->get_results("SELECT post_title FROM $wpdb->posts WHERE post_status = 'draft'");
-	if ($my_drafts) {
-
+		/* Before widget (defined by themes). */
 		echo $before_widget;
-		echo $before_title . $title  . $after_title;
-		lcb_list_drafts_output();
-		echo $after_widget;
-	}
-}
-	// This is the function that outputs the form to let users edit
-	// the widget's title and so on. It's an optional feature, but
-	// we'll use it because we can!
-	function widget_lcb_list_drafts_control() {
 
-		// Collect our widget's options.
-		$options = $newoptions = get_option('widget_lcb_list_drafts');
+		/* Display the widget title if one was input (before and after defined by themes). */
+		if ( $title )
+			echo $before_title . $title . $after_title;
 
-		// This is for handing the control form submission.
-		if ( $_POST['lcb_list_drafts-submit'] ) {
-			// Clean up control form submission options
-			$newoptions['title'] = strip_tags(stripslashes($_POST['lcb_list_drafts-title']));
-			$newoptions['untitled'] = strip_tags(stripslashes($_POST['lcb_list_drafts-untitled']));
-
-
-		// If original widget options do not match control form
-		// submission options, update them.
-		if ( $options != $newoptions ) {
-			$options = $newoptions;
-			update_option('widget_lcb_list_drafts', $options);
-		}
-		}
-
-		// Format options as valid HTML. Hey, why not.
-		$title = htmlspecialchars($options['title'], ENT_QUOTES);
-		$untitled = htmlspecialchars($options['untitled'], ENT_QUOTES);
-
-// The HTML below is the control form for editing options.
-?>
-		<div>
-		<p style="text-align:right;"><label for="lcb_list_drafts-title" style="line-height:35px;display:block;">Widget Title: <input type="text" id="lcb_list_drafts-title" name="lcb_list_drafts-title" value="<?php echo $title; ?>" /></label></p>
-		<p style="text-align:right;"><label for="lcb_list_drafts-untitled" style="line-height:35px;display:block;">Label for untitled drafts: <input type="text" id="lcb_list_drafts-untitled" name="lcb_list_drafts-untitled" value="<?php echo $untitled; ?>" /></label></p>
-		<input type="hidden" name="lcb_list_drafts-submit" id="lcb_list_drafts-submit" value="1" />
-		</div>
-	<?php
-	// end of widget_lcb_list_drafts_control()
-	}
-
-	// This registers the widget. About time.
-	register_sidebar_widget('List Drafts', 'widget_lcb_list_drafts');
-
-	// This registers the (optional!) widget control form.
-	register_widget_control('List Drafts', 'widget_lcb_list_drafts_control',315,175);
-}
-
-
-
-// This is the function that outputs the list into the widget
-function lcb_list_drafts_output() {
-	global $wpdb;
-
-	// initialise the variables
-	$options = get_option('widget_lcb_list_drafts');
-	$untitled = $options['untitled'];
-
-
-/*	This is where we extract the draft titles - Adapted from code provided by mdawaffe in the Wordpress Forum:
+		/* List them */
+		/*	This is where we extract the draft titles - Adapted from code provided by mdawaffe in the Wordpress Forum:
 	http://wordpress.org/support/topic/34503#post-195148
 */
+global $wpdb;
 $my_drafts = $wpdb->get_results("SELECT post_title FROM $wpdb->posts WHERE post_status = 'draft'");
 	if ($my_drafts) {
 
@@ -145,8 +107,51 @@ $my_drafts = $wpdb->get_results("SELECT post_title FROM $wpdb->posts WHERE post_
 		echo $my_draft_list;
 	}
 
+
+		
+		
+		/* After widget (defined by themes). */
+		echo $after_widget;
+	}
+
+	/**
+	 * Update the widget settings.
+	 */
+	function update( $new_instance, $old_instance ) {
+		$instance = $old_instance;
+
+		/* Strip tags for title and name to remove HTML (important for text inputs). */
+		$instance['title'] = strip_tags( $new_instance['title'] );
+		$instance['untitled'] = strip_tags( $new_instance['untitled'] );
+
+		return $instance;
+	}
+
+	/**
+	 * Displays the widget settings controls on the widget panel.
+	 * Make use of the get_field_id() and get_field_name() function
+	 * when creating your form elements. This handles the confusing stuff.
+	 */
+	function form( $instance ) {
+
+		/* Set up some default widget settings. */
+		$defaults = array( 'title' => __('List Drafts', 'listdrafts'), 'untitled' => __('An untitled post', 'listdrafts'));
+		$instance = wp_parse_args( (array) $instance, $defaults ); ?>
+
+		<!-- Widget Title: Text Input -->
+		<p>
+			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e('Title:', 'hybrid'); ?></label>
+			<input id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo $instance['title']; ?>" style="width:100%;" />
+		</p>
+
+		<!-- Name for Untitled Posts: Text Input -->
+		<p>
+			<label for="<?php echo $this->get_field_id( 'untitled' ); ?>"><?php _e('Label for untitled posts', 'listdrafts'); ?></label>
+			<input id="<?php echo $this->get_field_id( 'untitled' ); ?>" name="<?php echo $this->get_field_name( 'untitled' ); ?>" value="<?php echo $instance['untitled']; ?>" style="width:100%;" />
+		</p>
+
+	<?php
+	}
 }
 
-// Delays plugin execution until Dynamic Sidebar has loaded first.
-add_action('plugins_loaded', 'widget_lcb_list_drafts_init');
 ?>
