@@ -2,8 +2,8 @@
 Contributors: LesBessant
 Tags: draft, drafts, sidebar, widget 
 Requires at least: 2.8
-Tested up to: 3.0-Alpha
-Stable tag: 2.0.1
+Tested up to: 3.1.3
+Stable tag: 2.1
 
 Outputs an unordered list of the titles of saved draft posts in a sidebar widget. 
 == Description ==
@@ -33,6 +33,8 @@ My older <a href="http://wordpress.org/extend/plugins/list-draft-posts/">List Dr
 Err, maybe. But that would be a job for a better coder. Anyone who wants to make their own version is more than welcome to do so.
 
 == Changelog ==
+= 2.1 =
+* Bugfix: As menu items are a special kind of post, and can have a status of "Draft", under some circumstances these would be picked up as untitled posts by the widget. This version now checks for 'post_type' being "post", which will prevent this behaviour.
 
 = 2.0.1 =
 * Changed default widget title to "Coming Soon"

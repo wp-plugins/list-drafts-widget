@@ -3,7 +3,7 @@
 Plugin Name: List Drafts Widget
 Plugin URI: http://losingit.me.uk/2010/03/14/list-drafts-widget-revisited
 Description: A sidebar widget that lists the titles of draft posts
-Version: 2.0.1
+Version: 2.1
 Author: Les Bessant
 Author URI: http://losingit.me.uk/
 */
@@ -11,7 +11,7 @@ Author URI: http://losingit.me.uk/
 
 /*
 List Drafts Widget:
-Copyright (c) 2008-2010 Les Bessant
+Copyright (c) 2008-2011 Les Bessant
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -90,7 +90,7 @@ class ListDrafts_Widget extends WP_Widget {
 	http://wordpress.org/support/topic/34503#post-195148
 */
 global $wpdb;
-$my_drafts = $wpdb->get_results("SELECT post_title FROM $wpdb->posts WHERE post_status = 'draft'");
+$my_drafts = $wpdb->get_results("SELECT post_title FROM $wpdb->posts WHERE post_type = 'post' AND post_status = 'draft'");
 	if ($my_drafts) {
 
 		$my_draft_list = "<ul>";
