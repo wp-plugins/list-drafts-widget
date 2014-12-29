@@ -53,5 +53,5 @@ Err, maybe. But that would be a job for a better coder. Anyone who wants to make
 == Screenshots ==
 
 1. Widget configuration options
-2. Sample output
+2. Example of output
 
