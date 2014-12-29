@@ -2,7 +2,7 @@
 Contributors: LesBessant
 Tags: draft, drafts, sidebar, widget 
 Requires at least: 2.8
-Tested up to: 4.0
+Tested up to: 4.1
 Stable tag: 2.1.1
 
 Outputs an unordered list of the titles of saved draft posts in a sidebar widget. 
@@ -53,5 +53,5 @@ Err, maybe. But that would be a job for a better coder. Anyone who wants to make
 == Screenshots ==
 
 1. Widget configuration options
-2. Sample output
+2. Example of output
 
